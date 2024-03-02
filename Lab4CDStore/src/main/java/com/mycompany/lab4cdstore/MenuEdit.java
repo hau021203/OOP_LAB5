@@ -34,7 +34,7 @@ public class MenuEdit implements Serializable {
         YearOfRe = sc.nextInt();
     }
     public String OutputCD(){
-        return"Id :"+CDId+"\t| Collection :"+CDCollection+"\t| Type :"+CDType+"\t| Title :"+Title+"\t| Price :"+Price+"\t| Year of release :"+YearOfRe;
+        return"Id :"+CDId+" | Collection :"+CDCollection+" | Type :"+CDType+" | Title :"+Title+" | Price :"+Price+" | Year of release :"+YearOfRe;
     }
 
     public String getCDId() {
