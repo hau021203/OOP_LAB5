@@ -13,11 +13,13 @@ public class Lab4Polymorphism {
 
     public static void main(String[] args) {
         Lab4Polymorphism d = new Lab4Polymorphism();
-        d.loadStudent();
+        
         d.menu();
     }
     private Vector<Student> a = new Vector<Student>();
-
+    Lab4Polymorphism(){
+        loadStudent();
+    }
     public void addCol() {
         Student b = new College();
         b.Input();

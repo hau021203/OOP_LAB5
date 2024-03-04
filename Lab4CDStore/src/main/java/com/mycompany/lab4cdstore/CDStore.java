@@ -66,7 +66,6 @@ public class CDStore extends JFrame {
         add(Clear);
         add(Showall);
 
-        load();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(350, 250);
         setVisible(true);
@@ -74,7 +73,8 @@ public class CDStore extends JFrame {
         Add.addActionListener(e -> Add());
         Clear.addActionListener(e -> Clear());
         Showall.addActionListener(e -> Show());
-        Menu = new ArrayList<MenuEdit>();
+        Menu = new ArrayList<>();
+        load();
     }
 
     public void Add() {
@@ -92,7 +92,10 @@ public class CDStore extends JFrame {
         MenuEdit list = new MenuEdit(CDId, CDCollection, CDType, Title, Price, YearOfRe);
         Menu.add(list);
         CdlistModel.addElement(list.OutputCD());
-        JOptionPane.showMessageDialog(this, "Adding Successful");
+        if (true) {
+            JOptionPane.showMessageDialog(this, "Adding Successful");
+        }else
+            JOptionPane.showMessageDialog(this, "Adding Fail");
         save();
         Clear();
     }
@@ -105,7 +108,7 @@ public class CDStore extends JFrame {
     }
 
     public void Show() {
-        JFrame a = new JFrame();       
+        JFrame a = new JFrame();
         a.add(listScrollPane);
         a.setLayout(new GridBagLayout());
         a.setSize(600, 600);
@@ -116,6 +119,7 @@ public class CDStore extends JFrame {
     private void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("CDStore.hau"))) {
             oos.writeObject(Menu);
+            oos.close();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error saving employees to file.");
         }
@@ -125,8 +129,8 @@ public class CDStore extends JFrame {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("CDStore.hau"))) {
             Menu = (ArrayList<MenuEdit>) ois.readObject();
             for (MenuEdit list : Menu) {
-            CdlistModel.addElement(list.OutputCD());
-        }
+                CdlistModel.addElement(list.OutputCD());
+            }
         } catch (IOException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(this, "Error loading employees from file.");
         }
